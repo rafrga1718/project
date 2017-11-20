@@ -6,3 +6,4 @@ public class Alquiler {
 	boolean seguro;
 	
 }
+holaraul
