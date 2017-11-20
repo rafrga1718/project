@@ -17,3 +17,4 @@ public class Alquiler {
 		this.precio=n;
 	}
 }
+holaraul
