@@ -24,4 +24,10 @@ public class Alquiler {
 	public float __getprecio(){
 		return this.precio;
 	}
+	public void __settime(int n){
+		this.tiempo=n;
+	}
+	public int __gettime(){
+		return this.tiempo;
+	}
 }

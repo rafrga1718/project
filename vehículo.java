@@ -6,6 +6,8 @@ public abstract class vehículo {
 	float precio_alquiler;
 	int potencia;
 	String modelo;
+	boolean alquilado;
+	protected Alquiler a;
 
 	public vehículo() {
 		this.v_max=150;
@@ -14,6 +16,7 @@ public abstract class vehículo {
 		this.precio_alquiler=1000;
 		this.potencia=75;
 		this.modelo="1";
+		this.alquilado=false;
 	}
 	public void __setdata(int v,float p, float pa, int po, String m){
 		this.v_max=v;
@@ -22,10 +25,25 @@ public abstract class vehículo {
 		this.potencia=po;
 		this.modelo=m;
 	}
-	public boolean alquila(){
-		return true;
+	public void __setprecioalq(float n){
+		this.precio_alquiler=n;
 	}
 	public float __getprecioalq(){
 		return this.precio_alquiler;
+	}
+	public void __setalquilat(){
+		this.alquilado=true;
+	}
+	public void __unsetalquilat(){
+		this.alquilado=false;
+	}
+	public boolean __getalquilat(){
+		return this.alquilado;
+	}
+	public void __settime(int n){
+		a.tiempo=n;
+	}
+	public int __gettime(){
+		return a.tiempo;
 	}
 }
