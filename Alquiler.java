@@ -4,17 +4,24 @@ public class Alquiler {
 	String modo_pago;
 	int tiempo;
 	boolean seguro;
+	protected vehículo v;
 	public Alquiler(){
 		this.precio=4;
 		this.modo_pago="efectivo";
 		this.tiempo=4;
 		this.seguro=false;
 	}
-	public float calculaprecio(){
-		return this.precio*this.tiempo;
+	public void calculaprecio(vehículo v){
+		this.precio=__getpreualq(v)*this.tiempo;
 	}
-	public void setpreualq(float n){
-		this.precio=n;
+	public void __setpreualq(vehículo v){
+		this.precio=v.__getprecioalq();
+	}
+	public float __getpreualq(vehículo v){
+		__setpreualq(v);
+		return this.precio;
+	}
+	public float __getprecio(){
+		return this.precio;
 	}
 }
-holaraul
