@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 
 public abstract class vehículo {
 	int v_max;
@@ -7,8 +9,9 @@ public abstract class vehículo {
 	int potencia;
 	String modelo;
 	boolean alquilado;
+	boolean vendido;
 	protected Alquiler a;
-
+	Scanner data = new Scanner(System.in);
 	public vehículo() {
 		this.v_max=150;
 		this.precio=15000;
@@ -17,13 +20,22 @@ public abstract class vehículo {
 		this.potencia=75;
 		this.modelo="1";
 		this.alquilado=false;
+		this.vendido=false;
 	}
-	public void __setdata(int v,float p, float pa, int po, String m){
-		this.v_max=v;
-		this.precio=p;
-		this.precio_alquiler=pa;
-		this.potencia=po;
-		this.modelo=m;
+	public void __setdata(){
+		System.out.println("Introduce la velocidad máxima");
+		this.v_max=data.nextInt();
+		System.out.println("Introduce el tipo de combustible");
+		this.combustible=data.nextLine();
+		System.out.println("Introduce el precio");
+		this.precio=data.nextFloat();
+		System.out.println("Introduce el precio_alquiler ");
+		this.precio_alquiler=data.nextFloat();;
+		System.out.println("Introduce la potencia");
+		this.potencia=data.nextInt();
+		System.out.println("Introduce el modelo");
+		this.modelo=data.nextLine();
+		data.close();
 	}
 	public void __setprecioalq(float n){
 		this.precio_alquiler=n;
@@ -45,5 +57,11 @@ public abstract class vehículo {
 	}
 	public int __gettime(){
 		return a.tiempo;
+	}
+	public float __getprecio(){
+		return this.precio;
+	}
+	public void __setvendido(){
+		this.vendido=true;
 	}
 }

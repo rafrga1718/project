@@ -1,17 +1,20 @@
 
 import java.util.Arrays;
+
 import java.util.Scanner;
 public class Main {
 
-	public static void menuinicial(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq){
-		Scanner scanner = new Scanner(System.in);
-		Scanner scanner2 = new Scanner(System.in);
+	public static void menuinicial(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq, Venta v){
+		
 		int n=1;
 		do{
+			Scanner scanner = new Scanner(System.in);
+			Scanner scanner2 = new Scanner(System.in);
+				String saltoDeLinea = scanner.nextLine();
 				System.out.println("Elige opción:\n1. Admin" +
 						"\n2. Cliente"+"\n3. Exit"); 
 				n=1;
-				n = Integer.parseInt(scanner.nextLine()); 
+				n = scanner.nextInt(); 
 				int contraseña=123456;
 				switch(n){
 				case 1: 
@@ -19,28 +22,36 @@ public class Main {
 					int contr=Integer.parseInt(scanner2.nextLine());
 					if (contr==contraseña){
 						System.out.println("contrasenya correcta");
-					menuadmin(c1,a,b,valq);}
+					menuadmin(c1,a,b,valq, v);}
 					else 
 						System.out.println("contrasenya incorrecta");
+					scanner.close();
+					scanner2.close();
 					break;
 				case 2: 
 					menuuser(b,a,valq);
 					System.out.println();
+					scanner.close();
+					scanner2.close();
 					break;
 				case 3: 
 					System.out.println("Adios!");
+					scanner.close();
+					scanner2.close();
 					break;
 				default:
-					System.out.println("Introduzca una opción válida");break;
+					System.out.println("Introduzca una opción válida");
+					scanner.close();
+					scanner2.close();
+					break;
 				}
 				
-				System.out.println("\n"); //Mostrar un salto de línea en Java
+				System.out.println("\n"); 
 				
 		}while(n != 3);
-		scanner.close();
-		scanner2.close();
+		
 	}
-	public static void menuadmin(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq){
+	public static void menuadmin(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq, Venta v){
 		Scanner scanner = new Scanner(System.in);
 		int n=1;
 		int m;
@@ -49,9 +60,7 @@ public class Main {
 						"\n2. Añadir saldo a la cuenta "+"\n3. Recibir alquiler"
 						+"\n4. Hacer compra"+"\n5. Hacer venta"
 						+"\n6. Vuelve al menú previo"); 
-				//Recoger una variable por consola
 				n = Integer.parseInt(scanner.nextLine()); 
-				//Ejemplo de switch case en Java
 				switch(n){
 				case 1: 
 					c1.__getSaldo();
@@ -70,11 +79,59 @@ public class Main {
 						}
 					}
 				case 4: 
+					System.out.println("Que tipo de vehículo quieres comprar? \n1. Coche " +
+						"\n2. Furgoneta "+"\n3. Quad"
+						+"\n4. Moto_carretera"+"\n5. Moto_montaña"
+						+"\n6. Moto_nieve"+"\n7. Volver al menú previo");
+					m = scanner.nextInt();
+					switch (m){
+					case 1:
+						if(b[6]==null){
+							b[6]= new Coches();
+							b[6].__setdata();
+						}
+						else if (b[7]==null){
+							b[7]= new Coches();
+							b[7].__setdata();
+						}
+						else
+							System.out.println("Has llegado al número máximo de vehículos extra que caben en el almacén");
+						break;
+					case 2:
+						break;
+					case 3: 
+						break;
+					case 4:
+						break;
+					case 5:
+						break;
+					case 6:
+						break;
+					case 7:
+						break;
+					}
 					
 					break;
 				case 5: 
-					//menuclient
-					System.out.println();
+					System.out.println("Que vehículo quieres vender? introduce el número " +
+							"que hace referencia a la posición del elemento");
+					System.out.println(Arrays.asList(b));
+					m=scanner.nextInt();
+					m=m-1;
+					if(b[m]!=null){
+					b[m].__setvendido();
+					if (b[m].vendido){
+					 System.out.println("está vendido");
+						v.__setprecio(b[m]);
+						System.out.println(v.__getprecio());
+						b[m]=null;
+						c1.hacer_Venta(v);
+						System.out.println("S'ha realitzat la venta");
+						System.out.println(Arrays.asList(b));
+					}
+					}
+					else 
+						System.out.println("Introduce una opción válida ");
 					break;
 				case 6: 
 					System.out.println("Adios!");
@@ -83,7 +140,7 @@ public class Main {
 					System.out.println("Introduzca una opción válida");break;
 				}
 				
-				System.out.println("\n"); //Mostrar un salto de línea en Java
+				System.out.println("\n"); 
 				
 		}while(n != 6);
 		scanner.close();
@@ -94,9 +151,7 @@ public class Main {
 	do{
 			System.out.println("Elige opción:\n1. Alquila" +
 					"\n2. Exit"); 
-			//Recoger una variable por consola
 			n = Integer.parseInt(scanner.nextLine()); 
-			//Ejemplo de switch case en Java
 			switch(n){
 			case 1: 
 				System.out.println("Que vehículo quieres alquilar? introduce el número " +
@@ -127,7 +182,7 @@ public class Main {
 				System.out.println("Introduzca una opción válida");break;
 			}
 			
-			System.out.println("\n"); //Mostrar un salto de línea en Java
+			System.out.println("\n");
 			
 	}while(n != 2);
 	scanner.close();
@@ -143,9 +198,9 @@ public class Main {
 		c1.__getSaldo();*/
 		
 		Cuenta c1= new Cuenta();
-		Alquiler[] alquileres= new Alquiler[6];
-		vehículo[] vehículos = new vehículo[6];
-		vehículo[] valquilado =new vehículo[6];
+		Alquiler[] alquileres= new Alquiler[8];
+		vehículo[] vehículos = new vehículo[8];
+		vehículo[] valquilado =new vehículo[8];
 		vehículos[0] = new Coches();
 		vehículos[1] = new Furgonetas();
 		vehículos[2] = new Quad();
@@ -154,6 +209,8 @@ public class Main {
 		vehículos[5] = new Moto_nieve();
 		vehículos[0].__setalquilat();
 		valquilado[0]=vehículos[0];
+		Venta v1= new Venta();
+		System.out.println(Arrays.asList(vehículos));
 		/*if (vehículos[0].alquilado){
 			Alquiler a2= new Alquiler();
 			a2.__settime(5);
@@ -191,7 +248,7 @@ public class Main {
 		alquileres[3] = new Alquiler();
 		//alquileres[0].setpreualq(m1.__getprecioalq());*/
 		
-		menuinicial(c1,alquileres,vehículos,valquilado);
+		menuinicial(c1,alquileres,vehículos,valquilado,v1);
 		//Moto_carretera m1= new Moto_carretera();
 		/*Moto_montaña m2= new Moto_montaña();
 		Moto_nieve m3= new Moto_nieve();

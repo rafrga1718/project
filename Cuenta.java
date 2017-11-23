@@ -3,6 +3,7 @@ public class Cuenta {
 	int num_cuenta;
 	float saldo;
 	private Alquiler a;
+	private Venta venta;
 	public Cuenta(){
 		this.num_cuenta=123456789;
 		this.saldo=0;
@@ -19,7 +20,7 @@ public class Cuenta {
 	public void hacer_compra(float precio){
 		this.saldo=saldo-precio;
 	}
-	public void hacer_Venta(float precio){
-		this.saldo=saldo+precio;
+	public void hacer_Venta(Venta venta){
+		this.saldo=saldo+venta.__getprecio();
 	}
 }
