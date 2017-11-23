@@ -11,6 +11,7 @@ public class Quad extends vehículo{
 	public void __setdata(){
 		System.out.println("Introduce la velocidad máxima");
 		this.v_max=data.nextInt();
+		data.nextLine();
 		System.out.println("Introduce el tipo de combustible");
 		this.combustible=data.nextLine();
 		System.out.println("Introduce el precio");
@@ -19,10 +20,12 @@ public class Quad extends vehículo{
 		this.precio_alquiler=data.nextFloat();
 		System.out.println("Introduce la potencia");
 		this.potencia=data.nextInt();
+		data.nextLine();
 		System.out.println("Introduce el modelo");
 		this.modelo=data.nextLine();
 		System.out.println("Introduce el número de plazas");
 		this.num_plazas=data.nextInt();
+		data.nextLine();
 		System.out.println("Introduce el tipo de rueda");
 		this.tipo_rueda=data.nextLine();
 	}
