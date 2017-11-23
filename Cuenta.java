@@ -14,7 +14,7 @@ public class Cuenta {
 		System.out.println(this.saldo);
 	}
 	public void recibiralquiler(Alquiler a){
-		this.saldo=a.__getprecio();
+		this.saldo+=a.__getprecio();
 	}
 	public void hacer_compra(float precio){
 		this.saldo=saldo-precio;
