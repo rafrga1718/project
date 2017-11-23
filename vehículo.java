@@ -20,6 +20,20 @@ public abstract class vehículo {
 		this.potencia=75;
 		this.modelo="1";
 	}
+	public void __setdata(){
+		System.out.println("Introduce la velocidad máxima");
+		this.v_max=data.nextInt();
+		System.out.println("Introduce el tipo de combustible");
+		this.combustible=data.nextLine();
+		System.out.println("Introduce el precio");
+		this.precio=data.nextFloat();
+		System.out.println("Introduce el precio_alquiler ");
+		this.precio_alquiler=data.nextFloat();;
+		System.out.println("Introduce la potencia");
+		this.potencia=data.nextInt();
+		System.out.println("Introduce el modelo");
+		this.modelo=data.nextLine();
+	}
 	public void __setprecioalq(float n){
 		this.precio_alquiler=n;
 	}
