@@ -1,5 +1,5 @@
 
-public class Moto_carretera extends Motos{
+public class Moto_carretera extends Motos implements setdata{
 	boolean navegador;
 	public Moto_carretera(){
 		super();

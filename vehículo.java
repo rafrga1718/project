@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 
-public abstract class vehículo {
+public abstract class vehículo implements setdata{
 	int v_max;
 	String combustible;//ha de ser un enum
 	float precio;

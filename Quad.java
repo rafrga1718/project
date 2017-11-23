@@ -1,5 +1,5 @@
 
-public class Quad extends vehículo{
+public class Quad extends vehículo implements setdata{
 	String tipo_rueda;
 	int num_plazas;
 	public Quad(){
@@ -28,5 +28,9 @@ public class Quad extends vehículo{
 		data.nextLine();
 		System.out.println("Introduce el tipo de rueda");
 		this.tipo_rueda=data.nextLine();
+	}
+	public String __toString(){
+		return ("tiene "+this.num_plazas +" plazas");
+		
 	}
 }

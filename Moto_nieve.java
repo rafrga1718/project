@@ -1,5 +1,5 @@
 
-public class Moto_nieve extends Motos {
+public class Moto_nieve extends Motos implements setdata{
 	int tamaño_cadena;
 	public Moto_nieve(){
 		super();

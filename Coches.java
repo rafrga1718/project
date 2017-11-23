@@ -1,5 +1,5 @@
 
-public class Coches extends vehículo{
+public class Coches extends vehículo implements setdata{
 	int num_puertas;
 	String tipo_tracción;
 	int volumen_maletero;

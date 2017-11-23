@@ -1,5 +1,5 @@
 
-public class Furgonetas extends vehículo{
+public class Furgonetas extends vehículo implements setdata{
 	int num_puertas;
 	String tipo_tracción;
 	int capacidad_carga;

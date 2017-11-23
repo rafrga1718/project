@@ -1,6 +1,6 @@
 
-public class Moto_montaña extends Motos{
-	String amortiguadores;
+public class Moto_montaña extends Motos implements setdata{
+	private String amortiguadores;
 	String tipo_rueda;
 	public Moto_montaña(){
 		super();
