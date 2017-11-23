@@ -25,6 +25,5 @@ public class Quad extends vehículo{
 		this.num_plazas=data.nextInt();
 		System.out.println("Introduce el tipo de rueda");
 		this.tipo_rueda=data.nextLine();
-		data.close();
 	}
 }

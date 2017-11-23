@@ -5,16 +5,14 @@ import java.util.Scanner;
 public class Main {
 
 	public static void menuinicial(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq, Venta v){
-		
+		Scanner scanner = new Scanner(System.in);
+		Scanner scanner2 = new Scanner(System.in);
 		int n=1;
 		do{
-			Scanner scanner = new Scanner(System.in);
-			Scanner scanner2 = new Scanner(System.in);
-				String saltoDeLinea = scanner.nextLine();
 				System.out.println("Elige opción:\n1. Admin" +
 						"\n2. Cliente"+"\n3. Exit"); 
 				n=1;
-				n = scanner.nextInt(); 
+				n = Integer.parseInt(scanner.nextLine()); 
 				int contraseña=123456;
 				switch(n){
 				case 1: 
@@ -25,87 +23,212 @@ public class Main {
 					menuadmin(c1,a,b,valq, v);}
 					else 
 						System.out.println("contrasenya incorrecta");
-					scanner.close();
-					scanner2.close();
 					break;
 				case 2: 
 					menuuser(b,a,valq);
 					System.out.println();
-					scanner.close();
-					scanner2.close();
 					break;
 				case 3: 
 					System.out.println("Adios!");
-					scanner.close();
-					scanner2.close();
 					break;
 				default:
 					System.out.println("Introduzca una opción válida");
-					scanner.close();
-					scanner2.close();
 					break;
 				}
 				
 				System.out.println("\n"); 
 				
 		}while(n != 3);
-		
 	}
 	public static void menuadmin(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq, Venta v){
-		Scanner scanner = new Scanner(System.in);
+		Scanner s1 = new Scanner(System.in);
+		Scanner s2 = new Scanner(System.in);
 		int n=1;
 		int m;
 		do{
 				System.out.println("Elige opción:\n1. Ver saldo de cuenta " +
 						"\n2. Añadir saldo a la cuenta "+"\n3. Recibir alquiler"
 						+"\n4. Hacer compra"+"\n5. Hacer venta"
-						+"\n6. Vuelve al menú previo"); 
-				n = Integer.parseInt(scanner.nextLine()); 
+						+"\n6. Vuelve al menú previo"+"\n7. Ver alquileres"); 
+				n = Integer.parseInt(s1.nextLine()); 
 				switch(n){
 				case 1: 
 					c1.__getSaldo();
 					break;
 				case 2: 
 					System.out.println("Cantidad de saldo a añadir: ");
-					m=Integer.parseInt(scanner.nextLine()); 
+					m=Integer.parseInt(s2.nextLine()); 
 					c1.__setSaldo(m);
 					break;
 				case 3: 
 					for (int i=0; i<a.length;i++){
-						c1.recibiralquiler(a[i]);
 						if (valq[i]!=null){
+						c1.recibiralquiler(a[i]);
 						b[i]=valq[i];
 						valq[i]=null;
+						a[i]=null;
 						}
 					}
+					break;
 				case 4: 
 					System.out.println("Que tipo de vehículo quieres comprar? \n1. Coche " +
 						"\n2. Furgoneta "+"\n3. Quad"
 						+"\n4. Moto_carretera"+"\n5. Moto_montaña"
 						+"\n6. Moto_nieve"+"\n7. Volver al menú previo");
-					m = scanner.nextInt();
+					m = s2.nextInt();
 					switch (m){
 					case 1:
 						if(b[6]==null){
 							b[6]= new Coches();
 							b[6].__setdata();
+							if (b[6].__getprecio()>c1.__getsaldo()){
+								b[6]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[6].__getprecio());
 						}
 						else if (b[7]==null){
 							b[7]= new Coches();
 							b[7].__setdata();
+							if (b[7].__getprecio()>c1.__getsaldo()){
+								b[7]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[7].__getprecio());
+
 						}
 						else
 							System.out.println("Has llegado al número máximo de vehículos extra que caben en el almacén");
 						break;
 					case 2:
+						if(b[6]==null){
+							b[6]= new Furgonetas();
+							b[6].__setdata();
+							if (b[6].__getprecio()>c1.__getsaldo()){
+								b[6]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[6].__getprecio());
+
+						}
+						else if (b[7]==null){
+							b[7]= new Furgonetas();
+							b[7].__setdata();
+							if (b[7].__getprecio()>c1.__getsaldo()){
+								b[7]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[7].__getprecio());
+
+						}
+						else
+							System.out.println("Has llegado al número máximo de vehículos extra que caben en el almacén");
 						break;
 					case 3: 
+						if(b[6]==null){
+							b[6]= new Quad();
+							b[6].__setdata();
+							if (b[6].__getprecio()>c1.__getsaldo()){
+								b[6]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[6].__getprecio());
+
+						}
+						else if (b[7]==null){
+							b[7]= new Quad();
+							b[7].__setdata();
+							if (b[7].__getprecio()>c1.__getsaldo()){
+								b[7]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[7].__getprecio());
+						}
+						else
+							System.out.println("Has llegado al número máximo de vehículos extra que caben en el almacén");
 						break;
 					case 4:
+						if(b[6]==null){
+							b[6]= new Moto_carretera();
+							b[6].__setdata();
+							if (b[6].__getprecio()>c1.__getsaldo()){
+								b[6]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[6].__getprecio());
+
+						}
+						else if (b[7]==null){
+							b[7]= new Moto_carretera();
+							b[7].__setdata();
+							if (b[7].__getprecio()>c1.__getsaldo()){
+								b[7]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[7].__getprecio());
+
+						}
+						else
+							System.out.println("Has llegado al número máximo de vehículos extra que caben en el almacén");
 						break;
 					case 5:
+						if(b[6]==null){
+							b[6]= new Moto_montaña();
+							b[6].__setdata();
+							if (b[6].__getprecio()>c1.__getsaldo()){
+								b[6]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[6].__getprecio());
+
+						}
+						else if (b[7]==null){
+							b[7]= new Moto_montaña();
+							b[7].__setdata();
+							if (b[7].__getprecio()>c1.__getsaldo()){
+								b[7]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[7].__getprecio());
+
+						}
+						else
+							System.out.println("Has llegado al número máximo de vehículos extra que caben en el almacén");
 						break;
 					case 6:
+						if(b[6]==null){
+							b[6]= new Moto_nieve();
+							b[6].__setdata();
+							if (b[6].__getprecio()>c1.__getsaldo()){
+								b[6]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[6].__getprecio());
+
+						}
+						else if (b[7]==null){
+							b[7]= new Moto_nieve();
+							b[7].__setdata();
+							if (b[7].__getprecio()>c1.__getsaldo()){
+								b[7]=null;
+								System.out.println("No tienes dinero suficiente en tu cuenta");
+							}
+							else
+								c1.hacer_compra(b[7].__getprecio());
+						}
+						else
+							System.out.println("Has llegado al número máximo de vehículos extra que caben en el almacén");
 						break;
 					case 7:
 						break;
@@ -116,11 +239,10 @@ public class Main {
 					System.out.println("Que vehículo quieres vender? introduce el número " +
 							"que hace referencia a la posición del elemento");
 					System.out.println(Arrays.asList(b));
-					m=scanner.nextInt();
+					m=s2.nextInt();
 					m=m-1;
 					if(b[m]!=null){
-					b[m].__setvendido();
-					if (b[m].vendido){
+					if (b[m]!=null){
 					 System.out.println("está vendido");
 						v.__setprecio(b[m]);
 						System.out.println(v.__getprecio());
@@ -136,6 +258,10 @@ public class Main {
 				case 6: 
 					System.out.println("Adios!");
 					break;
+				case 7:
+					System.out.println(Arrays.asList(b));
+					System.out.println(Arrays.asList(valq));
+					System.out.println(Arrays.asList(a));
 				default:
 					System.out.println("Introduzca una opción válida");break;
 				}
@@ -143,36 +269,37 @@ public class Main {
 				System.out.println("\n"); 
 				
 		}while(n != 6);
-		scanner.close();
 	}
 	public static void menuuser(vehículo[] b,Alquiler[] a, vehículo[] valq){
-	Scanner scanner = new Scanner(System.in);
+	Scanner s3 = new Scanner(System.in);
+	Scanner s4 = new Scanner(System.in);
 	int n=1,m=1;
 	do{
 			System.out.println("Elige opción:\n1. Alquila" +
 					"\n2. Exit"); 
-			n = Integer.parseInt(scanner.nextLine()); 
+			n = Integer.parseInt(s3.nextLine()); 
 			switch(n){
 			case 1: 
 				System.out.println("Que vehículo quieres alquilar? introduce el número " +
 						"que hace referencia a la posición del elemento");
 				System.out.println(Arrays.asList(b));
-				m=Integer.parseInt(scanner.nextLine());
+				m=Integer.parseInt(s4.nextLine());
 				m=m-1;
-				b[m].__setalquilat();
-				if (b[m].alquilado){
+				if (b[m]!=null){
 					a[m]= new Alquiler();
 					valq[m]=b[m];
 					System.out.println("Introdueix el temps que tindràs alquilat el vehícle en dies: ");
-					int time=Integer.parseInt(scanner.nextLine());
+					int time=Integer.parseInt(s4.nextLine());
 					a[m].__settime(time);
 					a[m].calculaprecio(b[m]);
 					b[m]=null;
 					System.out.println("S'ha realitzat l'alquiler");
 					System.out.println(Arrays.asList(b));
 					System.out.println(Arrays.asList(valq));
-					
+					System.out.println(Arrays.asList(a));
 				}
+				else 
+					System.out.println("El vehículo solicitado ya ha sido alquilado o no existe.");
 				
 				break;
 			case 2: 
@@ -185,7 +312,6 @@ public class Main {
 			System.out.println("\n");
 			
 	}while(n != 2);
-	scanner.close();
 }
 	public static void main(String[] args) {	
 		/*Moto_carretera m1= new Moto_carretera();
@@ -207,8 +333,7 @@ public class Main {
 		vehículos[3] = new Moto_carretera();
 		vehículos[4] = new Moto_montaña();
 		vehículos[5] = new Moto_nieve();
-		vehículos[0].__setalquilat();
-		valquilado[0]=vehículos[0];
+		//vehículos[0].__setalquilat();
 		Venta v1= new Venta();
 		System.out.println(Arrays.asList(vehículos));
 		/*if (vehículos[0].alquilado){

@@ -26,7 +26,6 @@ public class Moto_nieve extends Motos {
 		this.tamaño_rueda=data.nextInt();
 		System.out.println("Introduce el tamaño de la cadena ");
 		this.tamaño_cadena=data.nextInt();
-		data.close();
 	}
 	public String muestracaracteristicas(){
 	String str= +this.v_max+"carnet necesario: "

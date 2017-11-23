@@ -28,6 +28,5 @@ public class Furgonetas extends vehículo{
 		this.tipo_tracción=data.nextLine();
 		System.out.println("Introduce la capacidad de carga");
 		this.capacidad_carga=data.nextInt();
-		data.close();
 	}
 }

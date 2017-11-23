@@ -30,7 +30,6 @@ public class Moto_montaña extends Motos{
 		this.tipo_rueda=data.nextLine();
 		System.out.println("Introduce el modelo de los amortiguadores ");
 		this.amortiguadores=data.nextLine();
-		data.close();
 	}
 	public String muestracaracteristicas(){
 	String str= +this.v_max+"carnet necesario: "

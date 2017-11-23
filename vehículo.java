@@ -19,8 +19,6 @@ public abstract class vehículo {
 		this.precio_alquiler=1000;
 		this.potencia=75;
 		this.modelo="1";
-		this.alquilado=false;
-		this.vendido=false;
 	}
 	public void __setdata(){
 		System.out.println("Introduce la velocidad máxima");
@@ -35,22 +33,12 @@ public abstract class vehículo {
 		this.potencia=data.nextInt();
 		System.out.println("Introduce el modelo");
 		this.modelo=data.nextLine();
-		data.close();
 	}
 	public void __setprecioalq(float n){
 		this.precio_alquiler=n;
 	}
 	public float __getprecioalq(){
 		return this.precio_alquiler;
-	}
-	public void __setalquilat(){
-		this.alquilado=true;
-	}
-	public void __unsetalquilat(){
-		this.alquilado=false;
-	}
-	public boolean __getalquilat(){
-		return this.alquilado;
 	}
 	public void __settime(int n){
 		a.tiempo=n;
@@ -60,8 +48,5 @@ public abstract class vehículo {
 	}
 	public float __getprecio(){
 		return this.precio;
-	}
-	public void __setvendido(){
-		this.vendido=true;
 	}
 }

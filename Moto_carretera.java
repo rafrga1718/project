@@ -26,7 +26,6 @@ public class Moto_carretera extends Motos{
 		this.tamaño_rueda=data.nextInt();
 		System.out.println("Tiene navegador? ");
 		this.navegador=data.nextBoolean();
-		data.close();
 	}
 	public String muestracaracteristicas(){
 	String str= +this.v_max+"carnet necesario: "

@@ -14,11 +14,15 @@ public class Cuenta {
 	public void __getSaldo(){
 		System.out.println(this.saldo);
 	}
+	public float __getsaldo(){
+		return this.saldo;
+	}
 	public void recibiralquiler(Alquiler a){
 		this.saldo+=a.__getprecio();
 	}
-	public void hacer_compra(float precio){
+	public float hacer_compra(float precio){
 		this.saldo=saldo-precio;
+		return this.saldo;
 	}
 	public void hacer_Venta(Venta venta){
 		this.saldo=saldo+venta.__getprecio();

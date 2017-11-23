@@ -29,7 +29,6 @@ public abstract class Motos extends vehículo {
 		this.estriberas=data.nextBoolean();
 		System.out.println("Introduce el tamaño de rueda");
 		this.tamaño_rueda=data.nextInt();
-		data.close();
 	}
 	public Motos(String carnet_req, boolean estriberas, int tamaño_rueda){
 		super();
