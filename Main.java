@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 public class Main {
 
-		public static void menuinicial(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq, Venta v){
+		public static void menuinicial(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq, Venta v,Admin ad,Usuario[] u){
 			Scanner scanner = new Scanner(System.in);
 			Scanner scanner2 = new Scanner(System.in);
 			int n=1;
@@ -13,19 +13,18 @@ public class Main {
 							"\n2. Cliente"+"\n3. Exit"); 
 					n=1;
 					n = Integer.parseInt(scanner.nextLine()); 
-					int contraseña=123456;
 					switch(n){
 					case 1: 
 						System.out.println("Introdueix la contrasenya");
 						int contr=Integer.parseInt(scanner2.nextLine());
-						if (contr==contraseña){
+						if (contr==ad.password){
 							System.out.println("contrasenya correcta");
-						menuadmin(c1,a,b,valq, v);}
+						menuadmin(c1,a,b,valq, v,u);}
 						else 
 							System.out.println("contrasenya incorrecta");
 						break;
 					case 2: 
-						menuuser(b,a,valq);
+						menuuser(b,a,valq,u);
 						System.out.println();
 						break;
 					case 3: 
@@ -40,7 +39,7 @@ public class Main {
 					
 			}while(n != 3);
 		}
-		public static void menuadmin(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq, Venta v){
+		public static void menuadmin(Cuenta c1, Alquiler[] a, vehículo[] b, vehículo[] valq, Venta v,Usuario[] u){
 			Scanner s1 = new Scanner(System.in);
 			Scanner s2 = new Scanner(System.in);
 			int n=1;
@@ -49,7 +48,7 @@ public class Main {
 					System.out.println("Elige opción:\n1. Ver saldo de cuenta " +
 							"\n2. Añadir saldo a la cuenta "+"\n3. Recibir alquiler"
 							+"\n4. Hacer compra"+"\n5. Hacer venta"
-							+"\n6. Vuelve al menú previo"+"\n7. Ver alquileres"); 
+							+"\n6. Vuelve al menú previo"+"\n7. Ver alquileres"+"\n8. Ver gasto de los usuarios"); 
 					n = Integer.parseInt(s1.nextLine()); 
 					switch(n){
 					case 1: 
@@ -262,6 +261,12 @@ public class Main {
 						System.out.println(Arrays.asList(b));
 						System.out.println(Arrays.asList(valq));
 						System.out.println(Arrays.asList(a));
+						break;
+					case 8:
+						for (int i=0;i<u.length && u[i]!=null ;i++){
+							System.out.print(u[i].nombre+" ha gastado: ");
+							System.out.println(u[i].__getdinero_Gastado()+"€");
+						}
 					default:
 						System.out.println("Introduzca una opción válida");break;
 					}
@@ -270,49 +275,99 @@ public class Main {
 					
 			}while(n != 6);
 		}
-		public static void menuuser(vehículo[] b,Alquiler[] a, vehículo[] valq){
+		public static void menuuser(vehículo[] b,Alquiler[] a, vehículo[] valq,Usuario[] u){
 		Scanner s3 = new Scanner(System.in);
+		String email="e";
+		int i=1,j,k=0;
+		do{
+			System.out.println("Elige opción:\n1. Registro" +
+					"\n2. Entra"+"\n3. Vuelve al menú principal");
+			k = Integer.parseInt(s3.nextLine());
+			switch(k){
+			case 1:
+				int n;
+				System.out.println("Hola, procedamos a hacer el registro ");
+				for (n=0; n<u.length && u[n]!=null; n++){
+				}
+				if (n<u.length){
+					u[n]= new Usuario();
+					u[n].__setdata();
+				}
+				else
+					System.out.println("El registro de usuarios está lleno");
+				System.out.println(Arrays.asList(u));
+				break;
+			case 2:
+				System.out.println("Introduce tu email ");
+				i=1;
+				while(i!=0){
+					email= s3.nextLine();
+
+					for(j=0;j<u.length && u[j]!=null && !email.equals(u[j].email);j++){
+					}
+					if(u[j]!=null && email.equals(u[j].email)){
+						System.out.println("Bienvenido "+u[j].nombre);
+						i=0;
+						menuuser2(b,a,valq,u,j);
+					}
+					else 
+						System.out.println("Usuario incorrecto, introduzca su email ");
+					}
+				break;
+			case 3:
+				break;
+			default:
+				System.out.println("Introduzca una opción válida");break;
+			}
+		}while(k!=3);
+}
+
+	public static void menuuser2(vehículo[] b,Alquiler[] a, vehículo[] valq,Usuario[] u, int j){
 		Scanner s4 = new Scanner(System.in);
 		int n=1,m=1;
 		do{
-				System.out.println("Elige opción:\n1. Alquila" +
-						"\n2. Exit"); 
-				n = Integer.parseInt(s3.nextLine()); 
-				switch(n){
-				case 1: 
-					System.out.println("Que vehículo quieres alquilar? introduce el número " +
-							"que hace referencia a la posición del elemento");
+			System.out.println("Elige opción:\n1. Alquila" +
+					"\n2. Ver gastos"+"\n3. Exit"); 
+			n = Integer.parseInt(s4.nextLine()); 
+			switch(n){
+			case 1: 
+				System.out.println("Que vehículo quieres alquilar? introduce el número " +
+						"que hace referencia a la posición del elemento");
+				System.out.println(Arrays.asList(b));
+				m=Integer.parseInt(s4.nextLine());
+				m=m-1;
+				if (b[m]!=null){
+					a[m]= new Alquiler();
+					valq[m]=b[m];
+					System.out.println("Introdueix el temps que tindràs alquilat el vehícle en dies: ");
+					int time=Integer.parseInt(s4.nextLine());
+					a[m].__settime(time);
+					a[m].calculaprecio(b[m]);
+					u[j].__setdinero_Gastado(a[m].precio);
+					b[m]=null;
+					System.out.println("S'ha realitzat l'alquiler");
 					System.out.println(Arrays.asList(b));
-					m=Integer.parseInt(s4.nextLine());
-					m=m-1;
-					if (b[m]!=null){
-						a[m]= new Alquiler();
-						valq[m]=b[m];
-						System.out.println("Introdueix el temps que tindràs alquilat el vehícle en dies: ");
-						int time=Integer.parseInt(s4.nextLine());
-						a[m].__settime(time);
-						a[m].calculaprecio(b[m]);
-						b[m]=null;
-						System.out.println("S'ha realitzat l'alquiler");
-						System.out.println(Arrays.asList(b));
-						System.out.println(Arrays.asList(valq));
-						System.out.println(Arrays.asList(a));
-					}
-					else 
-						System.out.println("El vehículo solicitado ya ha sido alquilado o no existe.");
-					
-					break;
-				case 2: 
-					System.out.println("Adios!");
-					break;
-				default:
-					System.out.println("Introduzca una opción válida");break;
+					System.out.println(Arrays.asList(valq));
+					System.out.println(Arrays.asList(a));
 				}
+				else 
+					System.out.println("El vehículo solicitado ya ha sido alquilado o no existe.");
 				
-				System.out.println("\n");
-				
-		}while(n != 2);
-	}
+				break;
+			case 2: 
+				System.out.println(u[j].__getdinero_Gastado());
+				break;
+			case 3: 
+				System.out.println("Adios!");
+				break;
+			default:
+				System.out.println("Introduzca una opción válida");break;
+			}
+			
+			System.out.println("\n");
+			
+	}while(n != 3);
+}
 	
 	public static void main(String[] args) {	
 		/*Moto_carretera m1= new Moto_carretera();
@@ -338,6 +393,8 @@ public class Main {
 		vehículos[5] = new Moto_nieve();
 		//vehículos[0].__setalquilat();
 		Venta v1= new Venta();
+		Admin admin= new Admin();
+		Usuario[] usuarios = new Usuario[10];
 		//System.out.println(Arrays.asList(vehículos));
 		//Quad q1= new Quad();
 		//System.out.println(q1.__toString());
@@ -378,7 +435,7 @@ public class Main {
 		alquileres[3] = new Alquiler();
 		//alquileres[0].setpreualq(m1.__getprecioalq());*/
 		
-		menuinicial(c1,alquileres,vehículos,valquilado,v1);
+		menuinicial(c1,alquileres,vehículos,valquilado,v1,admin,usuarios);
 		//Moto_carretera m1= new Moto_carretera();
 		/*Moto_montaña m2= new Moto_montaña();
 		Moto_nieve m3= new Moto_nieve();
